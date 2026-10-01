@@ -1,0 +1,20 @@
+menuconfig ZMK_WIDGET_BRIDGE
+    bool "ZMK weather and calendar widget bridge"
+    depends on ZMK_BLE
+    help
+      Exposes an encrypted BLE GATT write service through which a trusted
+      companion application can send display-ready weather and calendar data.
+
+if ZMK_WIDGET_BRIDGE
+
+config ZMK_WIDGET_BRIDGE_ACTIVE_TIMEOUT_SECONDS
+    int "Companion heartbeat timeout in seconds"
+    range 10 600
+    default 75
+
+config ZMK_WIDGET_BRIDGE_LOG_LEVEL
+    int "Widget bridge log level"
+    range 0 4
+    default 2
+
+endif

@@ -1,0 +1,13 @@
+[Unit]
+Description=ZMK weather and calendar widget sync
+After=bluetooth.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/zmk-widget-sync run
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

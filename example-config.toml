@@ -1,0 +1,23 @@
+[bluetooth]
+# Find this with: bluetoothctl devices
+address = "AA:BB:CC:DD:EE:FF"
+device_name = "FunkeeB_Corne"
+
+[sync]
+heartbeat_seconds = 30
+weather_refresh_seconds = 900
+calendar_refresh_seconds = 60
+
+[weather]
+enabled = true
+latitude = 52.2297
+longitude = 21.0122
+location = "Warszawa"
+
+[calendar]
+enabled = true
+credentials_file = "~/.config/zmk-widget-sync/credentials.json"
+token_file = "~/.config/zmk-widget-sync/token.json"
+calendar_ids = ["primary"]
+timezone = "Europe/Warsaw"
+max_events = 2
