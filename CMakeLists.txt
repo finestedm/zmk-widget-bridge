@@ -1,5 +1,5 @@
 if(CONFIG_ZMK_WIDGET_BRIDGE)
   zephyr_library()
-  zephyr_include_directories(include)
+  zephyr_include_directories(${APPLICATION_SOURCE_DIR}/include include)
   zephyr_library_sources(src/widget_bridge.c)
 endif()
