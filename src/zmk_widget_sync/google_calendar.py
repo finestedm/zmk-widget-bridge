@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import json
 from datetime import date, datetime, timezone
-from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from .config import CalendarConfig
@@ -17,18 +15,23 @@ def _credentials(config: CalendarConfig, interactive: bool):
     from google_auth_oauthlib.flow import InstalledAppFlow
 
     credentials = None
+    should_save = False
     if config.token_file.exists():
         credentials = Credentials.from_authorized_user_file(str(config.token_file), SCOPES)
     if credentials and credentials.expired and credentials.refresh_token:
         credentials.refresh(Request())
+        should_save = True
     elif not credentials or not credentials.valid:
         if not interactive:
             raise RuntimeError("Google Calendar is not authorized; run 'zmk-widget-sync auth-google'")
         flow = InstalledAppFlow.from_client_secrets_file(str(config.credentials_file), SCOPES)
         credentials = flow.run_local_server(port=0)
+        should_save = True
 
-    config.token_file.parent.mkdir(parents=True, exist_ok=True)
-    config.token_file.write_text(credentials.to_json(), encoding="utf-8")
+    if should_save:
+        config.token_file.parent.mkdir(parents=True, exist_ok=True)
+        config.token_file.write_text(credentials.to_json(), encoding="utf-8")
+        config.token_file.chmod(0o600)
     return credentials
 
 
