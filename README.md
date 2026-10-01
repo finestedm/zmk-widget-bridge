@@ -62,8 +62,8 @@ zmk-widget-sync once
 zmk-widget-sync run
 ```
 
-To start automatically, update `ExecStart` in `systemd/zmk-widget-sync.service`
-if the executable lives inside a virtual environment, then run:
+To start automatically using the virtual environment from the installation
+steps above, run:
 
 ```sh
 mkdir -p ~/.config/systemd/user

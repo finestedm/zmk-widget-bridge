@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/zmk-widget-sync run
+ExecStart=%h/.local/share/zmk-widget-sync/venv/bin/zmk-widget-sync run
 Restart=on-failure
 RestartSec=10
 
